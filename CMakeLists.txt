@@ -3,7 +3,12 @@ project(mst-sfml)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(mst-sfml src/main.cpp src/Node.cpp header/Node.hpp src/Graph.cpp src/Graph.hpp)
+add_executable(mst-sfml src/main.cpp
+        src/Node.cpp header/Node.hpp
+        src/Graph.cpp header/Graph.hpp
+        src/Edge.cpp header/Edge.hpp
+        src/Kruskal.cpp src/Kruskal.hpp
+        src/UnionFind.cpp header/UnionFind.hpp)
 
 include_directories(header /usr/include c:/SFML/include)
 

@@ -9,19 +9,26 @@
 #include <vector>
 #include <forward_list>
 #include <Node.hpp>
+#include "Edge.hpp"
 
 class Graph {
 public:
     Graph(int numOfNode = 0);
 
+    const std::vector<Edge> &getEdge() const;
+
+    void addEdge(Edge otherEdge);
+
     void addEdge(Node node1, Node node2, int weight);
+
+    int getNumberOfNode() const;
 
     void print();
 
 private:
     int numberOfNode;
-    std::vector<std::forward_list<std::pair<Node, int>>> graph;
 
+    std::vector<Edge> edge;
 
 
 };
