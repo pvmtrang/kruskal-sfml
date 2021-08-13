@@ -6,9 +6,7 @@
 #include <iostream>
 #include "Kruskal.hpp"
 
-void Kruskal::setGraph(const Graph &graph) {
-    Kruskal::graph = graph;
-
+Kruskal::Kruskal(const Graph &graph) : graph(graph) {
     edge = graph.getEdge();
 
     finalGraph = Graph(graph.getNumberOfNode());
@@ -18,7 +16,10 @@ void Kruskal::setGraph(const Graph &graph) {
     numberOfAddedEdge = 0;
 }
 
+void Kruskal::setGraph(const Graph &graph) {}
+
 void Kruskal::findMST() {
+    std::cout << "finding mst" << std::endl;
     //descending sort for easier pop
     std::sort(edge.begin(), edge.end(), std::greater<>());
 
@@ -41,6 +42,9 @@ void Kruskal::findMST() {
         }
     }
 
+    std::cout << "print mst" << std::endl;
     finalGraph.print();
 
 }
+
+

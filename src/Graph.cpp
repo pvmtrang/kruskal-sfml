@@ -5,6 +5,7 @@
 #include <iostream>
 #include <algorithm>
 #include "Graph.hpp"
+#include <fstream>
 
 Graph::Graph(int numOfNode) : numberOfNode(numOfNode) {
 }
@@ -33,6 +34,12 @@ const std::vector<Edge> &Graph::getEdge() const {
 
 int Graph::getNumberOfNode() const {
     return numberOfNode;
+}
+
+void Graph::readGraphFromFile(std::string filePath) {
+
+
+
 }
 
 

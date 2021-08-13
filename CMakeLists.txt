@@ -1,14 +1,14 @@
 cmake_minimum_required(VERSION 3.19)
-project(mst-sfml)
+project(kruskal-sfml)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(mst-sfml src/main.cpp
+add_executable(kruskal-sfml src/main.cpp
         src/Node.cpp header/Node.hpp
         src/Graph.cpp header/Graph.hpp
         src/Edge.cpp header/Edge.hpp
-        src/Kruskal.cpp src/Kruskal.hpp
-        src/UnionFind.cpp header/UnionFind.hpp)
+        src/Kruskal.cpp header/Kruskal.hpp
+        src/UnionFind.cpp header/UnionFind.hpp src/Start.cpp header/Start.hpp)
 
 include_directories(header /usr/include c:/SFML/include)
 
@@ -17,7 +17,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake_modules")
 find_package(SFML REQUIRED system window graphics network audio)
 if (SFML_FOUND)
     include_directories(${SFML_INCLUDE_DIR})
-    target_link_libraries(mst-sfml ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
+    target_link_libraries(kruskal-sfml ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
 endif()
 
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})

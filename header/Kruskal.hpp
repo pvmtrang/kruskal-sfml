@@ -11,8 +11,9 @@
 
 class Kruskal {
 public:
-    void setGraph(const Graph &graph);
+    Kruskal(const Graph &graph);
 
+    void setGraph(const Graph &graph);
 
     void findMST();
 

@@ -5,7 +5,6 @@
 #ifndef MST_SFML_GRAPH_HPP
 #define MST_SFML_GRAPH_HPP
 
-
 #include <vector>
 #include <forward_list>
 #include <Node.hpp>
@@ -14,6 +13,8 @@
 class Graph {
 public:
     Graph(int numOfNode = 0);
+
+    void readGraphFromFile(std::string filePath);
 
     const std::vector<Edge> &getEdge() const;
 

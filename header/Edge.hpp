@@ -13,7 +13,6 @@ class Edge {
 public:
     Edge(std::pair<Node, Node> node, int weight);
 
-
     const std::pair<Node, Node> &getNode() const;
 
     int getWeight() const;
