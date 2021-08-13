@@ -17,7 +17,7 @@ public:
 
     void loop();
 
-    void readGraphFromFile(std::string filePath);
+    void readGraphFromFile(const std::string& filePath);
 
     const Graph &getGraph() const;
 
@@ -35,6 +35,8 @@ private:
     sf::Font font;
 
     sf::Text text;
+
+    int mouseInsideNode(int mouseX, int mouseY);
 
 };
 

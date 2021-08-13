@@ -58,19 +58,27 @@ void Start::loop() {
 
                         text.setPosition(x, y);
 
-                        std::cout << "create node " << count << " at x = " << x << " y = " << y << std::endl;
+                        //if mouse clicks at blank
+                        if (mouseInsideNode(x, y) == Node::UNDEFINED) {
+                            std::cout << "create node " << count << " at x = " << x << " y = " << y << std::endl;
 
-                        tempNode.emplace_back(Node(count, font, x, y));
+                            tempNode.emplace_back(Node(count, font, x, y));
 //                        tempNode.emplace_back(text);
-                        count += 1;
+                            count += 1;
+                        } else {
+                            std::cout << "node is already created" << std::endl;
+                        }
+
+
+
                     }
                 default:
                     break;
             }
         }
 
-        for (int i = 0; i < tempNode.size(); i++) {
-            window.draw(tempNode[i]);
+        for (const auto & i : tempNode) {
+            window.draw(i);
 
         }
 
@@ -82,7 +90,7 @@ void Start::loop() {
 }
 
 //shit. This is useless because doesnt have node's position
-void Start::readGraphFromFile(std::string filePath) {
+void Start::readGraphFromFile(const std::string& filePath) {
     std::cout << "reading graph from file" << std::endl;
     std::ifstream file(filePath);
     std::string line;
@@ -136,5 +144,24 @@ void Start::readGraphFromFile(std::string filePath) {
 
 const Graph &Start::getGraph() const {
     return graph;
+}
+
+/**
+ * Check if mouse is clicking on any existed node.
+ * @param mouseX the x position of mouse click
+ * @param mouseY the y position of mouse click
+ * @return the data/id of node if mouse clicks on a node
+ *        else return undefined value
+ */
+int Start::mouseInsideNode(int mouseX, int mouseY) {
+    for (Node &n : tempNode) {
+        if (n.getX() <= mouseX && mouseX <= n.getX() + Node::SIZE_NODE
+            && n.getY() <= mouseY && mouseY <= n.getY() + Node::SIZE_NODE) {
+            std::cout << "mouse is inside node " << n.getData() << std::endl;
+            return n.getData();
+        }
+    }
+    std::cout << "mouse is outside" << std::endl;
+    return Node::UNDEFINED;
 }
 

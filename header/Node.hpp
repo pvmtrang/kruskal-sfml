@@ -12,13 +12,17 @@ class Node : public sf::Drawable {
 public:
     static const int SIZE_NODE = 30;
     static const int SIZE_BORDER = -2;
-    static const int UNDEFINED_COORD = -1;
+    static const int UNDEFINED = -1;
 
-    Node(int data,const sf::Font& font, int x = UNDEFINED_COORD, int y = UNDEFINED_COORD);
+    Node(int data, const sf::Font& font, int x = UNDEFINED, int y = UNDEFINED);
 
     int getData() const;
 
     void setPosition(int posX, int posY);
+
+    int getX() const;
+
+    int getY() const;
 
     void draw(sf::RenderTarget& target, sf::RenderStates state) const override;
 

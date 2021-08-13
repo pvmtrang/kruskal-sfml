@@ -34,9 +34,17 @@ void Node::setPosition(int posX, int posY){
     text.setPosition(x + SIZE_NODE / 3, y);
 }
 
+int Node::getX() const {
+    return x;
+}
+
+int Node::getY() const {
+    return y;
+}
+
 
 void Node::draw(sf::RenderTarget &target, sf::RenderStates state) const {
-    if (x == UNDEFINED_COORD || y == UNDEFINED_COORD) { //change to throw exception later
+    if (x == UNDEFINED || y == UNDEFINED) { //change to throw exception later
         std::cout << "cant draw this node with undefined position" << std::endl;
         return;
     }
@@ -47,4 +55,7 @@ void Node::draw(sf::RenderTarget &target, sf::RenderStates state) const {
     target.draw(shape);
     target.draw(text);
 }
+
+
+
 
