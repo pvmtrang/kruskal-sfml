@@ -6,11 +6,14 @@
 #include <fstream>
 #include "Start.hpp"
 
+
 Start::Start() {
     window.create(sf::VideoMode(800, 600), "title");
     count = 0;
 
     font.loadFromFile("assets/font/Abel-Regular.ttf");
+
+//    tempLine = Line();
 
 // select the font
     text.setFont(font); // font is a sf::Font
@@ -63,19 +66,29 @@ void Start::loop() {
                             std::cout << "create node " << count << " at x = " << x << " y = " << y << std::endl;
 
                             tempNode.emplace_back(Node(count, font, x, y));
+
+                            tempLine.clear();
+
 //                        tempNode.emplace_back(text);
                             count += 1;
                         } else {
                             std::cout << "node is already created" << std::endl;
+                            tempLine.setStartPoint(x , y);
                         }
 
 
-
                     }
+                case sf::Event::MouseMoved: {
+                    tempLine.setEndPoint(event.mouseMove.x, event.mouseMove.y);
+                    std::cout << "mouse move at x " << event.mouseMove.x << " y " << event.mouseMove.y << std::endl;
+                    break;
+                }
                 default:
                     break;
             }
         }
+
+        window.draw(tempLine);
 
         for (const auto & i : tempNode) {
             window.draw(i);
@@ -83,6 +96,8 @@ void Start::loop() {
         }
 
 //        window.draw(text);
+
+
 
         window.display();
     }

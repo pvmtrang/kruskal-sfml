@@ -8,6 +8,8 @@
 
 #include <SFML/Graphics.hpp>
 #include <Graph.hpp>
+#include "Line.hpp"
+
 
 class Start {
 public:
@@ -37,6 +39,8 @@ private:
     sf::Text text;
 
     int mouseInsideNode(int mouseX, int mouseY);
+
+    Line tempLine;
 
 };
 

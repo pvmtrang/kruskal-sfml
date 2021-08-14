@@ -8,7 +8,7 @@ add_executable(kruskal-sfml src/main.cpp
         src/Graph.cpp header/Graph.hpp
         src/Edge.cpp header/Edge.hpp
         src/Kruskal.cpp header/Kruskal.hpp
-        src/UnionFind.cpp header/UnionFind.hpp src/Start.cpp header/Start.hpp)
+        src/UnionFind.cpp header/UnionFind.hpp src/Start.cpp header/Start.hpp src/Line.cpp header/Line.hpp)
 
 include_directories(header /usr/include c:/SFML/include)
 
