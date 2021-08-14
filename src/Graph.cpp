@@ -12,6 +12,7 @@ Graph::Graph(int numOfNode) : numberOfNode(numOfNode) {
 
 void Graph::addEdge(Edge otherEdge) {
     edge.emplace_back(otherEdge);
+    std::cout << "edge added to graph" << std::endl;
 }
 
 void Graph::addEdge(Node node1, Node node2, int weight) {

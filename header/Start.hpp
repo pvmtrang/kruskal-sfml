@@ -9,6 +9,7 @@
 #include <SFML/Graphics.hpp>
 #include <Graph.hpp>
 #include "Line.hpp"
+#include "../src/TextField.hpp"
 
 
 class Start {
@@ -47,6 +48,8 @@ private:
     Node startLine;
 
     Node endLine;
+
+    sf::Text textField;
 
 };
 

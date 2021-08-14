@@ -22,12 +22,21 @@ public:
 
     void draw(sf::RenderTarget& target, sf::RenderStates state) const override;
 
+    void setFont(const sf::Font &font);
+
 private:
     std::pair<Node, Node> node;
 
     int weight;
 
     Line line;
+
+    sf::Text weightText;
+
+    sf::Font font;
+
+    bool isFontSet;
+
 
 
 };

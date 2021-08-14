@@ -6,16 +6,19 @@
 #include <fstream>
 #include "Start.hpp"
 
-
+//why does it work?? font hasnt been loaded yet???? should read more about constructor
 Start::Start() {
     window.create(sf::VideoMode(800, 600), "title");
     count = 0;
 
     font.loadFromFile("assets/font/Abel-Regular.ttf");
 
-//    tempLine = Line();
-
     isDrawingLine = false;
+    textField.setFont(font);
+    textField.setString("initial string");
+    textField.setFillColor(sf::Color::White);
+    textField.setOutlineColor(sf::Color::Red);
+    textField.setOutlineThickness(5.f);
 
 }
 
@@ -53,30 +56,42 @@ void Start::loop() {
 
                         //if mouse clicks at blank -> create node
                         if (clickedNode.isUndefined()) {
-                            std::cout << "create node " << count << " at x = " << x << " y = " << y << std::endl;
 
                             tempNode.emplace_back(Node(font, count, x, y));
 
                             tempLine.clear();
                             isDrawingLine = false;
+//                            textField.clear();
+                            textField.setString("");
 
                             count += 1;
                         } else { //if mouse click on a node -> create edge
-                            std::cout << "node is already created" << std::endl;
-
                             if (!isDrawingLine) { // if no line created yet aka click the first node
-                                tempLine.setStartPoint(x , y);
+                                tempLine.setStartPoint(x, y);
                                 isDrawingLine = true;
                                 startLine = clickedNode;
 
-                            //if there is a line start from some node aka click on node the second time
+                            //if there is a line started from some node aka click on node the second time
+                            //-> complete the edge
                             } else {
                                 endLine = clickedNode;
-                                graph.addEdge(startLine, endLine, 3);
+//khong thich cai nay lam vi phai thoat ra bam vao terminal xong lai quay lai
+                                int weight;
+                                std::cout << "ENTER EDGE WEIGHT: ";
+                                std::cin >> weight;
+
+//                                textField.setPosition((startLine.getX() + endLine.getX()) / 2,
+//                                                      (startLine.getY() + endLine.getY()) / 2);
+//                                textField.setString(std::to_string(weight));
+                                //phai tao duoc edge o cho nay co
+                                Edge tmpEdge(std::pair(startLine, endLine), weight);
+                                tmpEdge.setFont(font);
+
+                                graph.addEdge(tmpEdge);
+
                                 //finish drawing a line - creating an edge
                                 isDrawingLine = false;
-                                startLine.clear();
-                                endLine.clear();
+
                                 tempLine.clear();
                             }
                         }
@@ -85,9 +100,27 @@ void Start::loop() {
                     }
                 case sf::Event::MouseMoved: {
                     tempLine.setEndPoint(event.mouseMove.x, event.mouseMove.y);
-                    std::cout << "mouse move at x " << event.mouseMove.x << " y " << event.mouseMove.y << std::endl;
                     break;
                 }
+// định cho text hiện ngay ra màn hình để gõ xong thấy luôn thay vì gõ vào terminal
+// nhưng chưa nghĩ ra
+                /*case sf::Event::TextEntered: {
+                    if (48 <= event.text.unicode && event.text.unicode <= 57) {
+                        std::cout << "ASCII character typed: " << static_cast<char>(event.text.unicode) << std::endl;
+                        int weight = static_cast<char>(event.text.unicode) - '0';
+                        if (!startLine.isUndefined() && !endLine.isUndefined()) {
+                            textField.setString(std::to_string(weight));
+                            textField.setPosition((startLine.getX() + endLine.getX()) / 2,
+                                                  (startLine.getY() + endLine.getY()) / 2);
+
+                            graph.addEdge(startLine, endLine, weight);
+
+                            startLine.clear();
+                            endLine.clear();
+                        }
+
+                    }
+                }*/
                 default:
                     break;
             }
@@ -96,17 +129,17 @@ void Start::loop() {
         window.draw(tempLine);
 
 
-
         for (const auto & i : tempNode) {
             window.draw(i);
         }
+
+        window.draw(textField);
 
         window.draw(graph);
 
 
         window.display();
     }
-
 }
 
 //shit. This is useless because doesnt have node's position
