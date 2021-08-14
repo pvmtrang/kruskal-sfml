@@ -38,9 +38,15 @@ private:
 
     sf::Text text;
 
-    int mouseInsideNode(int mouseX, int mouseY);
+    Node mouseInsideNode(int mouseX, int mouseY);
 
     Line tempLine;
+
+    bool isDrawingLine;
+
+    Node startLine;
+
+    Node endLine;
 
 };
 

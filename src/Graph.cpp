@@ -17,6 +17,7 @@ void Graph::addEdge(Edge otherEdge) {
 void Graph::addEdge(Node node1, Node node2, int weight) {
     //check xem da noi chua??
     edge.emplace_back(Edge(std::pair(node1, node2), weight));
+    std::cout << "edge created from " << node1.getData() << "-" << node2.getData() << ": " << weight << std::endl;
 }
 
 void Graph::print() {
@@ -39,6 +40,13 @@ int Graph::getNumberOfNode() const {
 void Graph::readGraphFromFile(std::string filePath) {
 
 
+
+}
+
+void Graph::draw(sf::RenderTarget &target, sf::RenderStates state) const {
+    for (int i = 0; i < edge.size(); i++) {
+        target.draw(edge[i]);
+    }
 
 }
 

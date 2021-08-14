@@ -10,7 +10,7 @@
 #include <Node.hpp>
 #include "Edge.hpp"
 
-class Graph {
+class Graph  : public sf::Drawable {
 public:
     Graph(int numOfNode = 0);
 
@@ -25,6 +25,8 @@ public:
     int getNumberOfNode() const;
 
     void print();
+
+    void draw(sf::RenderTarget& target, sf::RenderStates state) const override;
 
 private:
     int numberOfNode;

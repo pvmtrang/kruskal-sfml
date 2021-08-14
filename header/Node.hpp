@@ -14,7 +14,9 @@ public:
     static const int SIZE_BORDER = -2;
     static const int UNDEFINED = -1;
 
-    Node(int data, const sf::Font& font, int x = UNDEFINED, int y = UNDEFINED);
+    Node();
+
+    Node(const sf::Font& font, int data = UNDEFINED, int x = UNDEFINED, int y = UNDEFINED);
 
     int getData() const;
 
@@ -25,6 +27,10 @@ public:
     int getY() const;
 
     void draw(sf::RenderTarget& target, sf::RenderStates state) const override;
+
+    bool isUndefined();
+
+    void clear();
 
 
 private:

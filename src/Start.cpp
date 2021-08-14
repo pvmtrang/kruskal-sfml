@@ -15,26 +15,15 @@ Start::Start() {
 
 //    tempLine = Line();
 
-// select the font
-    text.setFont(font); // font is a sf::Font
+    isDrawingLine = false;
 
-// set the string to display
-    text.setString("Hello world");
-
-// set the character size
-    text.setCharacterSize(24); // in pixels, not points!
-
-// set the color
-    text.setFillColor(sf::Color::Red);
-
-// set the text style
-    text.setStyle(sf::Text::Bold | sf::Text::Underlined);
 }
 
 Start::Start(std::string filePath) {
     readGraphFromFile(filePath);
     window.create(sf::VideoMode(800, 600), "title");
     count = 0;
+
 }
 
 void Start::loop() {
@@ -54,26 +43,42 @@ void Start::loop() {
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
                         window.close();
                     }
+                    break;
                 case sf::Event::MouseButtonPressed:
                     if (event.mouseButton.button == sf::Mouse::Left) {
                         int x = event.mouseButton.x;
                         int y = event.mouseButton.y;
 
-                        text.setPosition(x, y);
+                        Node clickedNode = mouseInsideNode(x, y);
 
-                        //if mouse clicks at blank
-                        if (mouseInsideNode(x, y) == Node::UNDEFINED) {
+                        //if mouse clicks at blank -> create node
+                        if (clickedNode.isUndefined()) {
                             std::cout << "create node " << count << " at x = " << x << " y = " << y << std::endl;
 
-                            tempNode.emplace_back(Node(count, font, x, y));
+                            tempNode.emplace_back(Node(font, count, x, y));
 
                             tempLine.clear();
+                            isDrawingLine = false;
 
-//                        tempNode.emplace_back(text);
                             count += 1;
-                        } else {
+                        } else { //if mouse click on a node -> create edge
                             std::cout << "node is already created" << std::endl;
-                            tempLine.setStartPoint(x , y);
+
+                            if (!isDrawingLine) { // if no line created yet aka click the first node
+                                tempLine.setStartPoint(x , y);
+                                isDrawingLine = true;
+                                startLine = clickedNode;
+
+                            //if there is a line start from some node aka click on node the second time
+                            } else {
+                                endLine = clickedNode;
+                                graph.addEdge(startLine, endLine, 3);
+                                //finish drawing a line - creating an edge
+                                isDrawingLine = false;
+                                startLine.clear();
+                                endLine.clear();
+                                tempLine.clear();
+                            }
                         }
 
 
@@ -90,13 +95,13 @@ void Start::loop() {
 
         window.draw(tempLine);
 
+
+
         for (const auto & i : tempNode) {
             window.draw(i);
-
         }
 
-//        window.draw(text);
-
+        window.draw(graph);
 
 
         window.display();
@@ -168,15 +173,15 @@ const Graph &Start::getGraph() const {
  * @return the data/id of node if mouse clicks on a node
  *        else return undefined value
  */
-int Start::mouseInsideNode(int mouseX, int mouseY) {
+Node Start::mouseInsideNode(int mouseX, int mouseY) {
     for (Node &n : tempNode) {
         if (n.getX() <= mouseX && mouseX <= n.getX() + Node::SIZE_NODE
             && n.getY() <= mouseY && mouseY <= n.getY() + Node::SIZE_NODE) {
             std::cout << "mouse is inside node " << n.getData() << std::endl;
-            return n.getData();
+            return n;
         }
     }
     std::cout << "mouse is outside" << std::endl;
-    return Node::UNDEFINED;
+    return Node();
 }
 

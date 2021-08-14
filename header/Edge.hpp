@@ -8,8 +8,9 @@
 
 #include <Node.hpp>
 #include <utility>
+#include "Line.hpp"
 
-class Edge {
+class Edge : public sf::Drawable {
 public:
     Edge(std::pair<Node, Node> node, int weight);
 
@@ -19,10 +20,14 @@ public:
 
     bool operator > (const Edge &otherEdge) const;
 
+    void draw(sf::RenderTarget& target, sf::RenderStates state) const override;
+
 private:
     std::pair<Node, Node> node;
 
     int weight;
+
+    Line line;
 
 
 };

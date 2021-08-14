@@ -5,7 +5,9 @@
 #include <iostream>
 #include "Node.hpp"
 
-Node::Node(int data, const sf::Font& font, int x, int y) : data(data), x(x), y(y) {
+Node::Node() : data(UNDEFINED), x(UNDEFINED), y(UNDEFINED){}
+
+Node::Node(const sf::Font& font, int data, int x, int y) : data(data), x(x), y(y) {
     shape.setSize(sf::Vector2f(SIZE_NODE, SIZE_NODE));
     shape.setFillColor(sf::Color::Blue);
     shape.setOutlineThickness(SIZE_BORDER);
@@ -55,6 +57,19 @@ void Node::draw(sf::RenderTarget &target, sf::RenderStates state) const {
     target.draw(shape);
     target.draw(text);
 }
+
+bool Node::isUndefined() {
+    return data == UNDEFINED && x == UNDEFINED && y == UNDEFINED;
+}
+
+void Node::clear() {
+    data = UNDEFINED;
+    x = UNDEFINED;
+    y = UNDEFINED;
+
+}
+
+
 
 
 
