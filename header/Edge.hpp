@@ -12,7 +12,7 @@
 
 class Edge : public sf::Drawable {
 public:
-    Edge(std::pair<Node, Node> node, int weight);
+    Edge(std::pair<Node, Node> node, int weight, sf::Color color = sf::Color::White);
 
     const std::pair<Node, Node> &getNode() const;
 
@@ -23,6 +23,8 @@ public:
     void draw(sf::RenderTarget& target, sf::RenderStates state) const override;
 
     void setFont(const sf::Font &font);
+
+    void setColor(sf::Color color);
 
 private:
     std::pair<Node, Node> node;

@@ -10,13 +10,13 @@
 #include <Node.hpp>
 #include "Edge.hpp"
 
-class Graph  : public sf::Drawable {
+class Graph : public sf::Drawable {
 public:
-    Graph();
+    Graph(sf::Color color = sf::Color::Blue);
 
     const std::vector<Edge> &getEdge() const;
 
-    void addEdge(const Edge& otherEdge);
+    void addEdge(Edge otherEdge);
 
     void addEdge(const Node& node1, const Node& node2, int weight);
 
@@ -36,6 +36,8 @@ private:
     bool hasCreatedThisEdge(const Node& node1, const Node& node2);
 
     void expandList(const Node& node);
+
+    sf::Color color;
 
 
 };

@@ -5,6 +5,11 @@
 #include <iostream>
 #include "Node.hpp"
 
+/**
+ * This is only for the creation of temporary, unnecessary node.
+ * This kind of node is not drawn on the window
+ * @param color
+ */
 Node::Node() : data(UNDEFINED), x(UNDEFINED), y(UNDEFINED){}
 
 Node::Node(const sf::Font& font, int data, int x, int y) : data(data), x(x), y(y) {
@@ -18,7 +23,6 @@ Node::Node(const sf::Font& font, int data, int x, int y) : data(data), x(x), y(y
     text.setFont(font);
     text.setString(std::to_string(data));
     text.setCharacterSize(SIZE_NODE * 2 / 3);
-
 
 }
 

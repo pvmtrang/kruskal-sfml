@@ -9,12 +9,13 @@
 #include <iostream>
 
 
-Edge::Edge(std::pair<Node, Node> node, int weight) : node(std::move(node)), weight(weight) {
+Edge::Edge(std::pair<Node, Node> node, int weight, sf::Color color) : node(std::move(node)), weight(weight) {
     if (node.first != node.second) {
         line.setStartPoint(node.first.getX() + Node::SIZE_NODE / 2,
                            node.first.getY() + Node::SIZE_NODE / 2);
         line.setEndPoint(node.second.getX() + Node::SIZE_NODE / 2,
                          node.second.getY() + Node::SIZE_NODE / 2);
+        setColor(color);
         isFontSet = false;
         //chua xet font o day -> bot 1 argument trong constructor
         weightText.setCharacterSize(20);
@@ -58,4 +59,8 @@ void Edge::setFont(const sf::Font &font) {
     weightText.setFont(font);
 
     std::cout << "set font for edge" << std::endl;
+}
+
+void Edge::setColor(sf::Color color) {
+    line.setColor(color);
 }

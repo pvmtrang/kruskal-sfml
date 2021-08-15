@@ -9,7 +9,7 @@
 #include <Graph.hpp>
 #include <UnionFind.hpp>
 
-class Kruskal {
+class Kruskal : public sf::Drawable {
 public:
     Kruskal();
 
@@ -18,6 +18,11 @@ public:
     void setGraph(const Graph &graph);
 
     void findMST();
+
+    void draw(sf::RenderTarget& target, sf::RenderStates state) const override;
+
+    bool isGraphSet;
+
 
 private:
     Graph graph;
@@ -29,6 +34,8 @@ private:
     UnionFind unionFind;
 
     int numberOfAddedEdge;
+
+
 
 };
 

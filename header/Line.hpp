@@ -16,7 +16,8 @@ public:
 //    Line();
 
     Line(int startX = Node::UNDEFINED, int startY = Node::UNDEFINED,
-         int endX = Node::UNDEFINED, int endY= Node::UNDEFINED, int thickness = LINE_THIN);
+         int endX = Node::UNDEFINED, int endY= Node::UNDEFINED,
+         sf::Color color = sf::Color::White, int thickness = LINE_THIN);
 
     void setStartPoint(int startX, int startY);
 
@@ -28,6 +29,7 @@ public:
 
     void clear();
 
+    void setColor(sf::Color color);
 
 private:
     int startX;

@@ -25,6 +25,7 @@ Start::Start() {
 void Start::loop() {
     std::cout << "start the loop" <<std::endl;
     while (window.isOpen()) {
+        window.setFramerateLimit(SPEED_HIGH);
         window.clear(sf::Color::Black);
 
         sf::Event event{};
@@ -41,8 +42,7 @@ void Start::loop() {
                     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
                         std::cout << "PRINT GRAPHHHHHH" << std::endl;
                         graph.print();
-//                        kruskal.setGraph(getGraph());
-//                        kruskal.findMST();
+                        kruskal.setGraph(getGraph());
                     }
                     break;
 //xem lai xem nen get mouse button relative to window or to screen
@@ -136,6 +136,7 @@ void Start::loop() {
         window.draw(tempLine);
 
 
+
         for (const auto & i : tempNode) {
             window.draw(i);
         }
@@ -145,6 +146,12 @@ void Start::loop() {
         window.draw(textField);
 
         window.draw(graph);
+
+        if (kruskal.isGraphSet) {
+            window.setFramerateLimit(SPEED_LOW);
+            kruskal.findMST();
+            window.draw(kruskal);
+        }
 
         window.display();
     }

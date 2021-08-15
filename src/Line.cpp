@@ -11,9 +11,9 @@
     shape.setFillColor(sf::Color::White);
 }*/
 
-Line::Line(int startX, int startY, int endX, int endY, int thickness)
+Line::Line(int startX, int startY, int endX, int endY, sf::Color color, int thickness)
             : startX(startX), startY(startY), endX(endX), endY(endY) {
-    shape.setFillColor(sf::Color::White);
+    shape.setFillColor(color);
     resizeShape();
 
 }
@@ -30,6 +30,10 @@ void Line::setEndPoint(int endX, int endY) {
     Line::endX = endX;
     Line::endY = endY;
     resizeShape();
+}
+
+void Line::setColor(sf::Color color) {
+    shape.setFillColor(color);
 }
 
 void Line::draw(sf::RenderTarget &target, sf::RenderStates state) const {
@@ -66,6 +70,9 @@ void Line::clear() {
     endY = Node::UNDEFINED;
 
 }
+
+
+
 
 
 

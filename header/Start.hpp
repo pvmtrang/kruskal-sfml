@@ -15,6 +15,9 @@
 
 class Start {
 public:
+    static const int SPEED_HIGH = 60;
+    static const int SPEED_LOW = 1;
+
     Start();
 
     void loop();
