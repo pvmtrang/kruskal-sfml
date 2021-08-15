@@ -10,17 +10,14 @@
 #include <Graph.hpp>
 #include "Line.hpp"
 #include "../src/TextField.hpp"
+#include "Kruskal.hpp"
 
 
 class Start {
 public:
     Start();
 
-    Start(std::string filePath);
-
     void loop();
-
-    void readGraphFromFile(const std::string& filePath);
 
     const Graph &getGraph() const;
 
@@ -50,6 +47,8 @@ private:
     Node endLine;
 
     sf::Text textField;
+
+    Kruskal kruskal;
 
 };
 

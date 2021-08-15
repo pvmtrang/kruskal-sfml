@@ -11,6 +11,8 @@
 
 class Kruskal {
 public:
+    Kruskal();
+
     Kruskal(const Graph &graph);
 
     void setGraph(const Graph &graph);

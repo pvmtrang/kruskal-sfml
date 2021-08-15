@@ -69,6 +69,14 @@ void Node::clear() {
 
 }
 
+bool Node::operator==(const Node &rhs) const {
+    return data == rhs.data;
+}
+
+bool Node::operator!=(const Node &rhs) const {
+    return !(rhs == *this);
+}
+
 
 
 

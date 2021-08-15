@@ -9,14 +9,17 @@
 Kruskal::Kruskal(const Graph &graph) : graph(graph) {
     edge = graph.getEdge();
 
-    finalGraph = Graph(graph.getNumberOfNode());
+    finalGraph = Graph();
 
     unionFind = UnionFind(graph.getNumberOfNode());
 
     numberOfAddedEdge = 0;
 }
 
-void Kruskal::setGraph(const Graph &graph) {}
+void Kruskal::setGraph(const Graph &graph) {
+    std::cout << "kruskal graph is set" << std::endl;
+    Kruskal::graph = graph;
+}
 
 void Kruskal::findMST() {
     std::cout << "finding mst" << std::endl;
@@ -46,5 +49,7 @@ void Kruskal::findMST() {
     finalGraph.print();
 
 }
+
+Kruskal::Kruskal() {}
 
 

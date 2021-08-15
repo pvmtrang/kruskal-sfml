@@ -32,6 +32,10 @@ public:
 
     void clear();
 
+    bool operator==(const Node &rhs) const;
+
+    bool operator!=(const Node &rhs) const;
+
 
 private:
     int data;

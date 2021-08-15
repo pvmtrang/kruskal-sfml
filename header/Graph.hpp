@@ -12,15 +12,13 @@
 
 class Graph  : public sf::Drawable {
 public:
-    Graph(int numOfNode = 0);
-
-    void readGraphFromFile(std::string filePath);
+    Graph();
 
     const std::vector<Edge> &getEdge() const;
 
-    void addEdge(Edge otherEdge);
+    void addEdge(const Edge& otherEdge);
 
-    void addEdge(Node node1, Node node2, int weight);
+    void addEdge(const Node& node1, const Node& node2, int weight);
 
     int getNumberOfNode() const;
 
@@ -29,9 +27,15 @@ public:
     void draw(sf::RenderTarget& target, sf::RenderStates state) const override;
 
 private:
-    int numberOfNode;
+    int numberOfNode; //needed for union find and kruskal
 
     std::vector<Edge> edge;
+
+    std::vector<std::vector<int>> adjacencyList;
+
+    bool hasCreatedThisEdge(const Node& node1, const Node& node2);
+
+    void expandList(const Node& node);
 
 
 };
