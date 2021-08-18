@@ -1,9 +1,9 @@
 # kruskal-sfml
-___
+
 A simple visualization of Kruskal finding the minimum spanning tree on custom graph in C++ with the help of SFML.
 
 # How it works:
-___
+
 - Click anywhere on SFML window to draw a node.
 - Click on an existed node to start drawing a line from it.
 - Click on another existed node to finish that line and create an edge between those in graph.
@@ -12,17 +12,16 @@ ___
 - Press Space bar to find the MST of the graph. Remember all nodes must be connected.
 
 # Structure:
-___
+
 - **Graph** has a vector of **Edge**
 - **Edge** has a pair of **Nodes** as vertices, a weight and a **Line**
 - **Line** is simply a sf::RectangleShape with a start and end position
 - **Node** is the smallest unit of graph with unique id (data).
 # Demo:
-___
+
 ![kruskal](assets/demo/kruskal.gif)
 
 # Library:
-___ 
 
 SFML (version 2.5.1)
 
