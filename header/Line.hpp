@@ -13,11 +13,9 @@ class Line : public sf::Drawable {
 public:
     static const int LINE_THIN = 2;
 
-//    Line();
-
     Line(int startX = Node::UNDEFINED, int startY = Node::UNDEFINED,
          int endX = Node::UNDEFINED, int endY= Node::UNDEFINED,
-         sf::Color color = sf::Color::White, int thickness = LINE_THIN);
+         sf::Color color = sf::Color::White);
 
     void setStartPoint(int startX, int startY);
 
@@ -25,7 +23,7 @@ public:
 
     void draw(sf::RenderTarget& target, sf::RenderStates state) const override;
 
-    double calculateAngle(int width, double length);
+    double calculateAngle(int width, double length) const;
 
     void clear();
 

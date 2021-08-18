@@ -27,6 +27,7 @@ public:
     void draw(sf::RenderTarget& target, sf::RenderStates state) const override;
 
 private:
+    //auto increase as list expands and edges added
     int numberOfNode; //needed for union find and kruskal
 
     std::vector<Edge> edge;

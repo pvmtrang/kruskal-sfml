@@ -8,27 +8,26 @@
 #include <Edge.hpp>
 #include <iostream>
 
-
+/**
+ * To create an edge with given vertex and weight, and color (optional).
+ * @param node two vertices, order doesnt matter
+ * @param weight positive
+ * @param color is the color of the line
+ */
 Edge::Edge(std::pair<Node, Node> node, int weight, sf::Color color) : node(std::move(node)), weight(weight) {
-    if (node.first != node.second) {
-        line.setStartPoint(node.first.getX() + Node::SIZE_NODE / 2,
-                           node.first.getY() + Node::SIZE_NODE / 2);
-        line.setEndPoint(node.second.getX() + Node::SIZE_NODE / 2,
-                         node.second.getY() + Node::SIZE_NODE / 2);
-        setColor(color);
-        isFontSet = false;
-        //chua xet font o day -> bot 1 argument trong constructor
-        weightText.setCharacterSize(20);
-        weightText.setString(std::to_string(weight));
-        weightText.setOutlineColor(sf::Color::Black);
-        weightText.setOutlineThickness(5.f);
-        weightText.setFillColor(sf::Color::White);
-        weightText.setPosition((node.first.getX() + node.second.getX()) / 2,
-                               (node.first.getY() + node.second.getY()) / 2);
-    } else {
-        std::cout << "No self connect edge allowed" << std::endl;
-    }
+    line.setStartPoint(node.first.getX() + Node::SIZE_NODE / 2,
+                       node.first.getY() + Node::SIZE_NODE / 2);
+    line.setEndPoint(node.second.getX() + Node::SIZE_NODE / 2,
+                     node.second.getY() + Node::SIZE_NODE / 2);
+    setColor(color);
 
+    weightText.setCharacterSize(20);
+    weightText.setString(std::to_string(weight));
+    weightText.setOutlineColor(sf::Color::Black);
+    weightText.setOutlineThickness(5.f);
+    weightText.setFillColor(sf::Color::White);
+    weightText.setPosition((node.first.getX() + node.second.getX()) / 2,
+                           (node.first.getY() + node.second.getY()) / 2);
 }
 
 const std::pair<Node, Node> &Edge::getNode() const {
@@ -51,14 +50,14 @@ void Edge::draw(sf::RenderTarget &target, sf::RenderStates state) const {
     target.draw(node.second);
 }
 
-//phai setFont moi khi tao mot edge?? -> phien
-//nhung neu them font vao constructor thi o trong graph cung phai them font
+/**
+ * Such pain to setFont whenever an edge is created.
+ * Two instructions must be together is troublesome
+ * But if add font to Edge constructor -> more trouble
+ * @param font
+ */
 void Edge::setFont(const sf::Font &font) {
-    Edge::font = font;
-    isFontSet = true;
     weightText.setFont(font);
-
-    std::cout << "set font for edge" << std::endl;
 }
 
 void Edge::setColor(sf::Color color) {

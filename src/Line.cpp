@@ -7,26 +7,20 @@
 #include <iostream>
 #include "Line.hpp"
 
-/*Line::Line() {
-    shape.setFillColor(sf::Color::White);
-}*/
 
-Line::Line(int startX, int startY, int endX, int endY, sf::Color color, int thickness)
+Line::Line(int startX, int startY, int endX, int endY, sf::Color color)
             : startX(startX), startY(startY), endX(endX), endY(endY) {
     shape.setFillColor(color);
     resizeShape();
-
 }
 
 void Line::setStartPoint(int startX, int startY) {
-//    std::cout << "reset line start point at x=" << startX <<" y=" << startY << std::endl;
     Line::startX = startX;
     Line::startY = startY;
     resizeShape();
 }
 
 void Line::setEndPoint(int endX, int endY) {
-//    std::cout << "reset line end point at x=" << endX <<" y=" << endY << std::endl;
     Line::endX = endX;
     Line::endY = endY;
     resizeShape();
@@ -42,6 +36,12 @@ void Line::draw(sf::RenderTarget &target, sf::RenderStates state) const {
     }
 }
 
+/**
+ * To resize the line as the mouse moves.
+ * Recalculate the length with mouse current position
+ * Recalculate the angle to rotate line
+ * Use setRotation, not rotate
+ */
 void Line::resizeShape() {
     shape.setPosition(startX, startY);
     int width = endX - startX;
@@ -52,8 +52,22 @@ void Line::resizeShape() {
     shape.setRotation(calculateAngle(width, length));
 
 }
-
-double Line::calculateAngle(int width, double length) {
+/**
+ * To calculate the corresponding angle as the mouse moves.
+ *  _width_
+ * |\ a  |
+ * | \ l |
+ * |  \  |
+ * |   \ height
+ * |----\|
+ * l is the current length of line
+ * width height is the corresponding measuremnts of the outbox
+ * angle is between width and length
+ * @param width
+ * @param length
+ * @return +angle if the line is under the width, -angle if above
+ */
+double Line::calculateAngle(int width, double length) const {
     double cos = width * 1.0 / length;
     double angle = std::acos(cos) * 180 / M_PI;
     if (endY >= startY) {
@@ -68,7 +82,6 @@ void Line::clear() {
     startY = Node::UNDEFINED;
     endX = Node::UNDEFINED;
     endY = Node::UNDEFINED;
-
 }
 
 

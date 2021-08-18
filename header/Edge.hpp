@@ -35,12 +35,6 @@ private:
 
     sf::Text weightText;
 
-    sf::Font font;
-
-    bool isFontSet;
-
-
-
 };
 
 
